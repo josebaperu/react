@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
+import {AppContext} from "../context/AppContext";
 
 const Form = () => {
     const [name, setName] = useState("defaultName");
     const [age, setAge] = useState(0);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(age);
-        console.log(name);
-    }
+    const context = useContext(AppContext);
+    const {items, setItems } = context;
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <label>name:
                 <input
                     type="text"
@@ -26,7 +24,12 @@ const Form = () => {
                     onChange={(e) => setAge(e.target.value)}
                 />
             </label>
-            <button type="submit" onSubmit={handleSubmit}>SUBMIT</button>
+            <button onClick={(e) => {
+                e.preventDefault();
+                const _items = items;
+                _items.push({name, age})
+                setItems(Object.create(_items))
+            }}>SUBMIT</button>
         </form>
     );
 }
