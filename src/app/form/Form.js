@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import store from "../store/store";
+//import store from "../store/store";
+import { useDispatch } from 'react-redux'
 
 const Form = () => {
     const [name, setName] = useState("defaultName");
     const [age, setAge] = useState(0);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(age);
-        console.log(name);
-    }
+    const dispatch = useDispatch()
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <label>name:
                 <input
                     type="text"
@@ -29,10 +26,14 @@ const Form = () => {
             </label>
             <button type="submit" onClick={e => {
                 e.preventDefault();
-                store.dispatch({
+                dispatch({
                     type: 'add',
                     item: {name, age}
                 });
+                /*store.dispatch({
+                    type: 'add',
+                    item: {name, age}
+                });*/
             }
             }>SUBMIT</button>
         </form>
