@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import store from "../store/store";
 
 const Form = () => {
     const [name, setName] = useState("defaultName");
@@ -26,7 +27,14 @@ const Form = () => {
                     onChange={(e) => setAge(e.target.value)}
                 />
             </label>
-            <button type="submit" onSubmit={handleSubmit}>SUBMIT</button>
+            <button type="submit" onClick={e => {
+                e.preventDefault();
+                store.dispatch({
+                    type: 'add',
+                    item: {name, age}
+                });
+            }
+            }>SUBMIT</button>
         </form>
     );
 }
