@@ -1,10 +1,15 @@
 describe('arrayTests', () => {
-    test('test 1', () => {
-        expect((1 + 2)).toEqual(3);
-        expect((2 + 2)).toEqual(4);
-    });
-    test('test 2', () => {
-        expect((1 + 2)).toEqual(3);
-        expect((2 + 2)).toEqual(4);
+
+    const arr = [
+        {name: "jose",age:12,country:"peru"},
+        {name: "luis",age:34,country:"ecuador"},
+        {name: "paco",age:56,country:"chile"}
+    ];
+    test('filter', () => {
+        const result = arr.filter( e => {
+            return e.name.includes("o");
+        });
+        expect(result.length).toEqual(2);
+        // https://www.w3schools.com/jsref/jsref_filter.asp
     });
 });
