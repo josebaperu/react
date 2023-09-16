@@ -4,12 +4,11 @@ export const fetchPersons = async () => {
 };
 export const newPerson = async (person) => {
   return fetch(BASE_API_URL, {
-    Method: 'POST',
-    Headers: {
-      Accept: 'application.json',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    Body: person,
-    Cache: 'default',
+    body: JSON.stringify(person),
   });
 };
