@@ -6,21 +6,20 @@ const Form = () => {
   const [name, setName] = useState('defaultName');
   const [age, setAge] = useState(0);
   const [persons, setPersons] = useState([]);
-  const [initFetch, setFetch] = useState(false);
+  const [initFetch, setInitFetch] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!initFetch) {
       fetchPersons().then((response) =>
-        response
-          .json()
-          .then((data) => {
+        response.json().then((data) => {
+          if (data?.error) {
+            console.log(`Error fetching persons ${data.status}`);
+          } else {
             setPersons(data);
-            setFetch(true);
-          })
-          .catch((e) => {
-            setFetch(true);
-          }),
+          }
+          setInitFetch(true);
+        }),
       );
     }
   }, [persons]);
@@ -58,7 +57,7 @@ const Form = () => {
           SUBMIT
         </button>
       </form>
-      {!!persons && (
+      {initFetch && !!persons.length && (
         <div>
           <div>Persons</div>
           <table>
