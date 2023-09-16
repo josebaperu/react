@@ -22,7 +22,7 @@ const Form = () => {
         }),
       );
     }
-  }, [persons]);
+  }, [persons, initFetch]);
   return (
     <>
       <form>
