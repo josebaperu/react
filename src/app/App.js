@@ -7,11 +7,11 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <p>App</p>
-            <Form/>
-            <Todo/>
+        <Form />
+        <Todo />
       </header>
     </div>
   );
-}
+};
 
 export default App;
