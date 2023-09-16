@@ -6,13 +6,22 @@ const Form = () => {
   const [name, setName] = useState('defaultName');
   const [age, setAge] = useState(0);
   const [persons, setPersons] = useState([]);
+  const [initFetch, setFetch] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (persons.length === 0) {
-      fetchPersons().then((data) => {
-        setPersons(data);
-      });
+    if (!initFetch) {
+      fetchPersons().then((response) =>
+        response
+          .json()
+          .then((data) => {
+            setPersons(data);
+            setFetch(true);
+          })
+          .catch((e) => {
+            setFetch(true);
+          }),
+      );
     }
   }, [persons]);
   return (
@@ -44,7 +53,8 @@ const Form = () => {
               type: 'add',
               item: { name, age },
             });
-          }}>
+          }}
+        >
           SUBMIT
         </button>
       </form>
